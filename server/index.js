@@ -30,10 +30,10 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    date: {
-        type: Date,
-        default: Date.now,
-    },
+    password: {
+        type: String,
+        required: true
+    }
 });
 const User = mongoose.model('users', UserSchema);
 User.createIndexes();
@@ -42,34 +42,20 @@ User.createIndexes();
 const express = require('express');
 const app = express();
 const cors = require("cors");
+app.set('view engine', 'ejs');
 console.log("App listen at port 3000");
 app.use(express.json());
 app.use(cors());
 app.get("/", (req, resp) => {
 
     resp.send("App is Working");
-    // You can check backend is working or not by 
-    // entering http://loacalhost:5000
-    
-    // If you see App is working means
-    // backend working properly
 });
 
-app.post("/register", async (req, resp) => {
-    try {
-        const user = new User(req.body);
-        let result = await user.save();
-        result = result.toObject();
-        if (result) {
-            delete result.password;
-            resp.send(req.body);
-            console.log(result);
-        } else {
-            console.log("User already register");
-        }
+app.get("/login", async (req, resp) => {
+    resp.render('login')
+})
 
-    } catch (e) {
-        resp.send("Something Went Wrong");
-    }
+app.get("/signup", async (req, resp) => {
+    resp.render('signup')
 });
 app.listen(3000);
