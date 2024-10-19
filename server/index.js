@@ -1,0 +1,75 @@
+// Code  for mongoose config in backend
+// Filename - backend/index.js
+const mongoose = require('mongoose');
+
+
+// To connect with your mongoDB database
+const connectDB = async () => {
+  try {
+    await mongoose.connect('mongodb+srv://francisco080304:XT66mWM0xSGsvBs4@creditscorewebapp.ynw7x.mongodb.net/?retryWrites=true&w=majority&appName=CreditScoreWebApp', {
+      dbName: 'creditscorewebapp',
+    });
+    console.log('Connected to creditscorewebapp database');
+  } catch (err) {
+    console.error('Error connecting to the database:', err);
+    process.exit(1); // Exit the process with failure
+  }
+};
+
+// Call the function to connect to MongoDB
+connectDB();
+
+// Schema for users of app
+const UserSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+});
+const User = mongoose.model('users', UserSchema);
+User.createIndexes();
+
+// For backend and express
+const express = require('express');
+const app = express();
+const cors = require("cors");
+console.log("App listen at port 3000");
+app.use(express.json());
+app.use(cors());
+app.get("/", (req, resp) => {
+
+    resp.send("App is Working");
+    // You can check backend is working or not by 
+    // entering http://loacalhost:5000
+    
+    // If you see App is working means
+    // backend working properly
+});
+
+app.post("/register", async (req, resp) => {
+    try {
+        const user = new User(req.body);
+        let result = await user.save();
+        result = result.toObject();
+        if (result) {
+            delete result.password;
+            resp.send(req.body);
+            console.log(result);
+        } else {
+            console.log("User already register");
+        }
+
+    } catch (e) {
+        resp.send("Something Went Wrong");
+    }
+});
+app.listen(3000);
