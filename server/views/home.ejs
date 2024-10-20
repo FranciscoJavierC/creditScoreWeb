@@ -1,17 +1,40 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Login In</title>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Time User Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
-
 <body>
-    <h2>Welcome, Name!</h2>
-    <p> Credit Score: 800
-        
-    </p>
+  <div class="container">
+    <h1 class="text-center my-4">Welcome, First Time User!</h1>
 
+    <!-- Compare Credit Companies Section -->
+    <div class="mb-4">
+      <h2 class="h4 mb-3">Compare Credit Companies</h2>
+      <div class="card">
+        <div class="card-body">
+          <p>This section provides the best-matched credit companies based on the information you have provided. The companies will be listed from the best match to the least match.</p>
+          <a href="/companies" class="btn btn-primary">See Companies</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Important Info Section -->
+    <div class="mb-4">
+      <h2 class="h4 mb-3">Important Info</h2>
+      <div class="card">
+        <div class="card-body">
+          <p>This section contains an overview of important terms related to credit, including the differences between statements and credit scores. Make sure to review this information to help you make informed decisions.</p>
+          <a href="/important-info" class="btn btn-primary">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

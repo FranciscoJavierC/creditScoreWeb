@@ -62,4 +62,8 @@ app.get("/signup", async (req, resp) => {
 app.get("/home", async (req, resp) => {
   resp.render("home")
 })
+
+app.get("/currentUser", async (req, resp) => {
+  resp.render("currentUser")
+})
 app.listen(3000);
